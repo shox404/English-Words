@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import { path } from "@/app/globals";
 import { read, rewrite } from "@/app/_utils/fs";
 
 export async function GET() {
