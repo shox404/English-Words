@@ -4,7 +4,7 @@ import { read, rewrite } from "@/app/_utils/fs";
 export async function GET() {
   try {
     return NextResponse.json(await read());
-  } catch (error) {
+  } catch {
     return NextResponse.json({ msg: "Server error!" });
   }
 }
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     words.push(word);
     await rewrite(words);
     return NextResponse.json(word);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ msg: "Server error!" });
   }
 }
