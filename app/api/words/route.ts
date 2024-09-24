@@ -3,7 +3,12 @@ import { read, rewrite } from "@/app/_utils/fs";
 
 export async function GET() {
   try {
-    return NextResponse.json(await read());
+    const words = await read();
+    const group = words.reduce((a: any, _: any, i: number) => {
+      if (i % 6 == 0) a.push(words.slice(i, i + 6));
+      return a;
+    }, []);
+    return NextResponse.json(group);
   } catch {
     return NextResponse.json({ msg: "Server error!" });
   }

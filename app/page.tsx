@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useWords } from "./_store/words";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { bg } from "./globals";
 
 export default function Home() {
   const { words, get } = useWords();
@@ -22,23 +23,31 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main className="min-h-screen grid gap-3 p-3 grid-cols-2 items-baseline">
       {words.map((item, index) => (
-        <Card key={index} className="card">
-          <CardHeader className="flex justify-between items-center">
-            <div className="flex gap-3 items-center">
-              <h1 className="capitalize">{item.word}</h1> -
-              <h2>{item.translate}</h2>
-            </div>
-            <button
-              className="bg-black p-1 rounded-md"
-              onClick={() => speech(item.word)}
-            >
-              🔊
-            </button>
-          </CardHeader>
-          <CardBody>
-            <p className="capitalize">{item.example}</p>
+        <Card key={index} style={{ background: bg.random() }}>
+          <CardBody className="grid grid-cols-2 grid-rows-3 gap-2">
+            {item.map((item, index) => (
+              <Card key={index}>
+                <CardHeader className="flex justify-between items-center">
+                  <div className="flex gap-3 items-center">
+                    <h1 className="capitalize text-2xl font-bold">
+                      {item.word}
+                    </h1>{" "}
+                    -<h2>{item.translate}</h2>
+                  </div>
+                  <button
+                    className="bg-black p-1 rounded-md"
+                    onClick={() => speech(item.word)}
+                  >
+                    🔊
+                  </button>
+                </CardHeader>
+                <CardBody>
+                  <p className="capitalize">{item.example}</p>
+                </CardBody>
+              </Card>
+            ))}
           </CardBody>
         </Card>
       ))}

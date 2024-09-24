@@ -6,8 +6,13 @@ type Word = {
 };
 
 type WordState = {
-  words: Word[];
+  words: Word[][];
   set: (data: Word[]) => void;
   get: () => Promise<void>;
   add: (data: Word) => Promise<void>;
+};
+
+type Bg = {
+  colors: string[];
+  random: () => void;
 };
