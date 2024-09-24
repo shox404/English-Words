@@ -7,4 +7,6 @@ type Word = {
 
 type WordState = {
   words: Word[];
+  set: (data: Word[]) => void;
+  add: (data: Word) => Promise<void>;
 };

@@ -3,4 +3,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .card {
+    width: 350px;
+    padding: 20px;
+    h1 {
+      font-weight: 600;
+      font-size: 20px;
+    }
+    button {
+      width: 100%;
+    }
+  }
 }

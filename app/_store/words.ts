@@ -1,6 +1,11 @@
 import { create } from "zustand";
+import axios from "axios";
 
-const useWords = create((set) => ({
-  words: [] as Word[],
-  add: (data: Word) => set((state: WordState) => state.words.push(data)),
+export const useWords = create<WordState>((set) => ({
+  words: [],
+  set: (data: any) => set((state: WordState) => (state = data)),
+  add: async (data: Word) => {
+    const response = await axios.post("/api/words", data);
+    set((state) => ({ words: [...state.words, response.data] }));
+  },
 }));
