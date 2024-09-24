@@ -22,13 +22,13 @@ export default function Admin() {
 
   const { add } = useWords();
 
-  const handleChange = ({
+  const change = ({
     target,
   }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState((prev) => ({ ...prev, [target.id]: target.value }));
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await add(state).then(() => {
       setState({ word: "", translate: "", example: "" });
@@ -42,20 +42,15 @@ export default function Admin() {
           <h1>Create word</h1>
         </CardHeader>
         <CardBody>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={submit}>
             <label htmlFor="word">Word</label>
-            <Input
-              id="word"
-              value={state.word}
-              onChange={handleChange}
-              required
-            />
+            <Input id="word" value={state.word} onChange={change} required />
             <Spacer y={2} />
             <label htmlFor="translate">Translate</label>
             <Input
               id="translate"
               value={state.translate}
-              onChange={handleChange}
+              onChange={change}
               required
             />
             <Spacer y={2} />
@@ -63,7 +58,7 @@ export default function Admin() {
             <Textarea
               id="example"
               value={state.example}
-              onChange={handleChange}
+              onChange={change}
               required
             />
             <Spacer y={5} />

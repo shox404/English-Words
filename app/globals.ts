@@ -1,3 +1,3 @@
 export const path = {
-  words: "app/data/words.json",
+  words: "data/words.json",
 };

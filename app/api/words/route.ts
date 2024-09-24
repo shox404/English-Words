@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
   try {
     const word = await request.json();
     const words = await read();
-    words.push(word);
+    const id = Date.now() / (Math.random() * 999);
+    words.push({ ...word, know: false, id });
     await rewrite(words);
     return NextResponse.json(word);
   } catch {
