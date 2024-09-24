@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+main {
+  min-height: 100dvh;
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: baseline;
+  .card {
+    h1 {
+      font-size: 23px;
+      font-weight: 700;
+    }
+  }
+}
