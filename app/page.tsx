@@ -26,7 +26,7 @@ export default function Home() {
     <main className="min-h-screen grid gap-3 p-3 grid-cols-2 items-baseline">
       {words.map((item, index) => (
         <Card key={index} style={{ background: bg.random() }}>
-          <CardBody className="grid grid-cols-2 grid-rows-3 gap-2">
+          <CardBody className="grid gap-2">
             {item.map((item, index) => (
               <Card key={index}>
                 <CardHeader className="flex justify-between items-center">
@@ -44,7 +44,8 @@ export default function Home() {
                   </button>
                 </CardHeader>
                 <CardBody>
-                  <p className="capitalize">{item.example}</p>
+                  <p className="font-semibold">{item.example}</p>
+                  <p className="text-xs font-medium">{item.example}</p>
                 </CardBody>
               </Card>
             ))}

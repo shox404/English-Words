@@ -18,6 +18,7 @@ export default function Admin() {
     word: "",
     translate: "",
     example: "",
+    ex_tr: "",
   });
 
   const { add } = useWords();
@@ -31,7 +32,7 @@ export default function Admin() {
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await add(state).then(() => {
-      setState({ word: "", translate: "", example: "" });
+      setState({ word: "", translate: "", example: "", ex_tr: "" });
     });
   };
 
@@ -58,6 +59,13 @@ export default function Admin() {
             <Textarea
               id="example"
               value={state.example}
+              onChange={change}
+              required
+            />
+            <label htmlFor="example">Translate</label>
+            <Textarea
+              id="ex_tr"
+              value={state.ex_tr}
               onChange={change}
               required
             />

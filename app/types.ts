@@ -3,6 +3,7 @@ type Word = {
   word: string;
   translate: string;
   example: string;
+  ex_tr: string;
 };
 
 type WordState = {
