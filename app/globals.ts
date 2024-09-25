@@ -94,3 +94,10 @@ export const bg = {
     return this.colors[Math.floor(Math.random() * this.colors.length)];
   },
 };
+
+export const wordSchema = {
+  word: "",
+  translate: "",
+  example: "",
+  ex_tr: "",
+}

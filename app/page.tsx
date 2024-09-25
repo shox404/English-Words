@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { useWords } from "./_store/words";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { bg } from "./globals";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { words, get } = useWords();
+  const router = useRouter();
 
   useEffect(() => {
     if (words.length == 0) get();
@@ -33,19 +35,27 @@ export default function Home() {
                   <div className="flex gap-3 items-center">
                     <h1 className="capitalize text-2xl font-bold">
                       {item.word}
-                    </h1>{" "}
+                    </h1>
                     -<h2>{item.translate}</h2>
                   </div>
-                  <button
-                    className="bg-black p-1 rounded-md"
-                    onClick={() => speech(item.word)}
-                  >
-                    🔊
-                  </button>
+                  <div className="flex gap-3 items-center">
+                    <button
+                      className="bg-primary-50 p-1 rounded-md"
+                      onClick={() => router.push(`/admin/${item.id}`)}
+                    >
+                      🖋️
+                    </button>
+                    <button
+                      className="bg-orange-50 p-1 rounded-md"
+                      onClick={() => speech(item.word)}
+                    >
+                      🔊
+                    </button>
+                  </div>
                 </CardHeader>
                 <CardBody>
                   <p className="font-semibold">{item.example}</p>
-                  <p className="text-xs font-medium">{item.example}</p>
+                  <p className="text-xs font-medium">{item.ex_tr}</p>
                 </CardBody>
               </Card>
             ))}

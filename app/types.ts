@@ -1,5 +1,5 @@
 type Word = {
-  id?: number;
+  id?: any;
   word: string;
   translate: string;
   example: string;
@@ -8,7 +8,7 @@ type Word = {
 
 type WordState = {
   words: Word[][];
-  set: (data: Word[]) => void;
+  edit: (data: Word) => Promise<void>;
   get: () => Promise<void>;
   add: (data: Word) => Promise<void>;
 };
