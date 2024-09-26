@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Link, Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import "./globals.scss";
-import { NextUIProvider } from "@nextui-org/react";
+import Words from "./_components/words";
 
 export const metadata: Metadata = {
   title: "Words",
@@ -14,7 +15,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Navbar>
+          <NavbarBrand>
+            <Link href="/">
+              <Words />
+            </Link>
+          </NavbarBrand>
+          <NavbarContent justify="end">
+            <Link href="/know">Know</Link>
+            <Link href="/test">Test</Link>
+          </NavbarContent>
+        </Navbar>
+        {children}
+      </body>
     </html>
   );
 }

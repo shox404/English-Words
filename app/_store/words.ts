@@ -1,8 +1,10 @@
 import { create } from "zustand";
 import axios from "axios";
+import { wordSchema } from "../globals";
 
 export const useWords = create<WordState>((set) => ({
   words: [],
+  testWord: wordSchema,
   edit: async (data: Word) => {
     const response = await axios.put(`/api/words/${data.id}`, data);
     set((state) => {
@@ -13,10 +15,18 @@ export const useWords = create<WordState>((set) => ({
   },
   get: async () => {
     const response = await axios.get("/api/words");
-    set((state) => (state.words = response.data));
+    set(() => ({ words: response.data }));
   },
   add: async (data: Word) => {
     const response = await axios.post("/api/words", data);
-    set((state) => ({ words: [...state.words, response.data] }));
+    set((state) => ({ words: [...state.words, [response.data]] }));
+  },
+  random: () => {
+    set((state) => {
+      const flattenedWords = state.words.flat();
+      const randomWord =
+        flattenedWords[Math.floor(Math.random() * flattenedWords.length)];
+      return { testWord: randomWord };
+    });
   },
 }));

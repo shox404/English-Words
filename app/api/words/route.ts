@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const words = await read();
     const group = words.reduce((a: any, _: any, i: number) => {
-      if (i % 6 == 0) a.push(words.slice(i, i + 6));
+      if (i % 4 == 0) a.push(words.slice(i, i + 4));
       return a;
     }, []);
     return NextResponse.json(group);

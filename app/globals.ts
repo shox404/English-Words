@@ -100,4 +100,4 @@ export const wordSchema = {
   translate: "",
   example: "",
   ex_tr: "",
-}
+};
