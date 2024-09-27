@@ -10,10 +10,12 @@ type Word = {
 type WordState = {
   words: Word[][];
   testWord?: Word;
+  filter: string;
   edit: (data: Word) => Promise<void>;
   get: () => Promise<void>;
   add: (data: Word) => Promise<void>;
   random: () => void;
+  setFilter: (value: string) => void;
 };
 
 type Bg = {

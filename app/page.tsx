@@ -3,11 +3,10 @@
 import { useEffect } from "react";
 import { useWords } from "./_store/words";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
-import { bg } from "./globals";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { words, get } = useWords();
+  const { words, get, filter } = useWords();
   const router = useRouter();
 
   useEffect(() => {
@@ -26,42 +25,48 @@ export default function Home() {
 
   return (
     <main className="min-h-screen grid gap-3 p-3 grid-cols-2 items-baseline">
-      {words.map((item, index) => (
-        <Card key={index} style={{ background: bg.random() }}>
-          <CardBody className="grid gap-2">
-            {item.map((item, index) => (
-              <Card key={index}>
-                <CardHeader className="flex justify-between items-center">
-                  <div className="flex gap-3 items-center">
-                    <h1 className="capitalize text-2xl font-bold">
-                      {item.word}
-                    </h1>
-                    -<h2>{item.translate}</h2>
-                  </div>
-                  <div className="flex gap-3 items-center">
-                    <button
-                      className="bg-primary-50 p-1 rounded-md"
-                      onClick={() => router.push(`/admin/${item.id}`)}
-                    >
-                      🖋️
-                    </button>
-                    <button
-                      className="bg-orange-50 p-1 rounded-md"
-                      onClick={() => speech(item.word)}
-                    >
-                      🔊
-                    </button>
-                  </div>
-                </CardHeader>
-                <CardBody>
-                  <p className="font-semibold">{item.example}</p>
-                  <p className="text-xs font-medium">{item.ex_tr}</p>
-                </CardBody>
-              </Card>
-            ))}
-          </CardBody>
-        </Card>
-      ))}
+      {words
+        .filter((e) => e.length > 0)
+        .map((item, index) => (
+          <Card key={index} className={index % 3 !== 0 ? "bg-amber-300" : "bg"}>
+            <CardBody className="grid gap-2">
+              {item
+                .filter((e) =>
+                  e.word.toLowerCase().includes(filter.toLowerCase())
+                )
+                .map((e, i) => (
+                  <Card key={i}>
+                    <CardHeader className="flex justify-between items-center">
+                      <div className="flex gap-3 items-center">
+                        <h1 className="capitalize text-2xl font-bold">
+                          {e.word}
+                        </h1>
+                        -<h2>{e.translate}</h2>
+                      </div>
+                      <div className="flex gap-3 items-center">
+                        <button
+                          className="bg-primary-50 p-1 rounded-md"
+                          onClick={() => router.push(`/admin/${e.id}`)}
+                        >
+                          🖋️
+                        </button>
+                        <button
+                          className="bg-orange-50 p-1 rounded-md"
+                          onClick={() => speech(e.word)}
+                        >
+                          🔊
+                        </button>
+                      </div>
+                    </CardHeader>
+                    <CardBody>
+                      <p className="font-semibold">{e.example}</p>
+                      <p className="text-xs font-medium">{e.ex_tr}</p>
+                    </CardBody>
+                  </Card>
+                ))}
+            </CardBody>
+          </Card>
+        ))}
     </main>
   );
 }

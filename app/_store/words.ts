@@ -4,6 +4,7 @@ import { wordSchema } from "../globals";
 
 export const useWords = create<WordState>((set) => ({
   words: [],
+  filter: "",
   testWord: wordSchema,
   edit: async (data: Word) => {
     const response = await axios.put(`/api/words/${data.id}`, data);
@@ -12,6 +13,9 @@ export const useWords = create<WordState>((set) => ({
       updatedWords.push(response.data);
       return { words: [updatedWords] };
     });
+  },
+  setFilter: (value: string) => {
+    set(() => ({ filter: value }));
   },
   get: async () => {
     const response = await axios.get("/api/words");

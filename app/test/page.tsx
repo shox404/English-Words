@@ -20,8 +20,12 @@ export default function Test() {
   }, [words]);
 
   const check = () => {
-    setTranslate("");
-    random();
+    console.log(testWord?.example);
+
+    if (translate == testWord?.example) {
+      random();
+      setTranslate("");
+    }
   };
 
   return (
@@ -32,6 +36,7 @@ export default function Test() {
           <Input
             placeholder="Translate"
             value={translate}
+            color={translate !== testWord?.example ? "default" : "success"}
             onChange={(e) => setTranslate(e.target.value)}
           />
           <Spacer y={2} />
