@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useWords } from "./_store/words";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
@@ -8,10 +7,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const { words, get, filter } = useWords();
   const router = useRouter();
-
-  useEffect(() => {
-    if (words.length == 0) get();
-  }, [words]);
 
   const speech = (text: string) => {
     const uttr = new SpeechSynthesisUtterance(text);

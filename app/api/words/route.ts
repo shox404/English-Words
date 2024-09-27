@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { read, rewrite } from "@/app/_utils/fs";
+import { shuffleArray } from "@/app/_utils/functions";
 
 export async function GET() {
   try {
     const words = await read();
-    const group = words.reduce((a: any, _: any, i: number) => {
+    const group = shuffleArray(words).reduce((a: any, _: any, i: number) => {
       if (i % 4 == 0) a.push(words.slice(i, i + 4));
       return a;
     }, []);
