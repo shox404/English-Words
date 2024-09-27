@@ -9,9 +9,12 @@ import {
 } from "@nextui-org/react";
 import { useEffect } from "react";
 import { useWords } from "../_store/words";
+import { usePathname } from "next/navigation";
 
 export default function Bar() {
   const { get, words, setFilter } = useWords();
+  const path = usePathname();
+  const flatWords = words.flat();
 
   useEffect(() => {
     get();
@@ -21,8 +24,9 @@ export default function Bar() {
     <Navbar>
       <NavbarBrand>
         <Link href="/" className="text-black text-xl">
-          {words.flat().filter((e) => !e.know).length} words from{" "}
-          {words.flat().length}
+          {`${
+            flatWords.filter((e) => (path !== "/know" ? !e.know : e.know)).length
+          } words from ${flatWords.length}`}
         </Link>
       </NavbarBrand>
       <NavbarContent justify="center">
